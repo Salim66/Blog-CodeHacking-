@@ -24,4 +24,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 // Admin User Route
-Route::resource('/admin/user', AdminUserController::class);
+Route::resource('/admin/users', AdminUserController::class);
