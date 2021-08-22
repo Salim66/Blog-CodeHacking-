@@ -9,6 +9,7 @@
                 <th>Role</th>
                 <th>Name</th>
                 <th>Email</th>
+                <th>Active</th>
                 <th>Created</th>
                 <th>Updated</th>
             </tr>
@@ -24,6 +25,7 @@
                     <td>{{ @$user->role->name }}</td>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
+                    <td><?php if($user->is_active){ ?><span class='badge badge-success'>Active</span><?php }else{ ?><span class='badge badge-danger'>Inactive</span><?php } ?></td>
                     <td>{{ $user->created_at->diffForHumans() }}</td>
                     <td>{{ $user->updated_at->diffForHumans() }}</td>
                 </tr>
