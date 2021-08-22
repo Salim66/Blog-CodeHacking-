@@ -20,6 +20,10 @@
             {!! Form::label('status', 'Status:') !!}
             {!! Form::select('is_active', [1 => 'Active', 0 => 'Inactive'], 0, ['class' => 'form-control']) !!}
         </div>
+        <div class="form-group">
+            {!! Form::label('password', 'Password:') !!}
+            {!! Form::password('password', ['class' => 'form-control']) !!}
+        </div>
 
         <div class="form-group">
             {!! Form::submit('Add User', ['class' => 'btn btn-primary']) !!}
