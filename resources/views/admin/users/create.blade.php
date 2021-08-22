@@ -18,7 +18,7 @@
         </div>
         <div class="form-group">
             {!! Form::label('status', 'Status:') !!}
-            {!! Form::text('email', null, ['class' => 'form-control', 'autocomplete' => 'off']) !!}
+            {!! Form::select('is_active', [1 => 'Active', 0 => 'Inactive'], 0, ['class' => 'form-control']) !!}
         </div>
 
         <div class="form-group">
