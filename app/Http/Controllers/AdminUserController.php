@@ -6,6 +6,7 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
+use App\Models\Photo;
 
 class AdminUserController extends Controller
 {
@@ -41,8 +42,14 @@ class AdminUserController extends Controller
     {
         $input = $request->all();
 
-        if($request->file('photo_id')){
-            return 'Has Photo';
+        if($file = $request->file('photo_id')){
+            $name = time() . $file->getClientOriginalName();
+            $file->move('images/', $name);
+
+            $photo = Photo::create(['file' => $name]);
+
+            $input['photo_id'] = $photo->id;
+
         }
     }
 
