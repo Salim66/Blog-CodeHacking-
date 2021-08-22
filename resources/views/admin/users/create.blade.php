@@ -3,7 +3,7 @@
 @section('content')
 
     <h1>User Create</h1>
-    {!! Form::open(['method' => 'POST', 'action' => 'App\Http\Controllers\AdminUserController@store']) !!}
+    {!! Form::open(['method' => 'POST', 'action' => 'App\Http\Controllers\AdminUserController@store', 'files' => true]) !!}
         <div class="form-group">
             {!! Form::label('name', 'Name:') !!}
             {!! Form::text('name', null, ['class' => 'form-control', 'autocomplete' => 'off']) !!}
@@ -21,8 +21,8 @@
             {!! Form::select('is_active', [1 => 'Active', 0 => 'Inactive'], 0, ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
-            {!! Form::label('file', 'Photo:') !!}
-            {!! Form::file('file', ['class' => 'form-control']) !!}
+            {!! Form::label('photo', 'Photo:') !!}
+            {!! Form::file('photo', ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('password', 'Password:') !!}
