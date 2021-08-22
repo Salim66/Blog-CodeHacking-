@@ -9,7 +9,7 @@
                 <th>Role</th>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Active</th>
+                <th>Status</th>
                 <th>Created</th>
                 <th>Updated</th>
             </tr>

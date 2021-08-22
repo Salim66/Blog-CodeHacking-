@@ -5,8 +5,20 @@
     <h1>User Create</h1>
     {!! Form::open(['method' => 'POST', 'action' => 'App\Http\Controllers\AdminUserController@store']) !!}
         <div class="form-group">
-            {!! Form::label('name') !!}
+            {!! Form::label('name', 'Name:') !!}
             {!! Form::text('name', null, ['class' => 'form-control', 'autocomplete' => 'off']) !!}
+        </div>
+        <div class="form-group">
+            {!! Form::label('email', 'Email:') !!}
+            {!! Form::text('email', null, ['class' => 'form-control', 'autocomplete' => 'off']) !!}
+        </div>
+        <div class="form-group">
+            {!! Form::label('role', 'Role:') !!}
+            {!! Form::text('email', null, ['class' => 'form-control', 'autocomplete' => 'off']) !!}
+        </div>
+        <div class="form-group">
+            {!! Form::label('status', 'Status:') !!}
+            {!! Form::text('email', null, ['class' => 'form-control', 'autocomplete' => 'off']) !!}
         </div>
 
         <div class="form-group">
