@@ -22,6 +22,10 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/admin-u', function(){
+    return view('admin.users.index');
+});
+
 
 // Admin User Route
 Route::resource('/admin/users', AdminUserController::class);
