@@ -24,7 +24,7 @@
                 <tr>
                     <td>{{ $i++ }}</td>
                     <td>{{ @$user->role->name }}</td>
-                    <td>{{ $user->name }}</td>
+                    <td><a href="{{ route('users.edit', $user->id) }}">{{ $user->name }}</a></td>
                     <td>{{ $user->email }}</td>
                     <td><img style="width: 40px; height: 40px; border-radius: 50%;" src="{{ URL::to('') }}{{ @$user->photo->file }}" alt="Not found!"></td>
                     <td><?php if($user->is_active){ ?><span class='badge badge-success'>Active</span><?php }else{ ?><span class='badge badge-danger'>Inactive</span><?php } ?></td>
