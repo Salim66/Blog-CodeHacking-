@@ -22,7 +22,7 @@
 
 </head>
 
-<body id="admin-page">
+<body id="admin-page" style="padding-top: 0;">
 
 <div id="wrapper">
 
