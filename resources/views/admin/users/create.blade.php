@@ -30,4 +30,6 @@
         </div>
     {!! Form::close() !!}
 
+    @include('admin.layouts.includes.form_error')
+
 @stop
