@@ -8,6 +8,7 @@ use App\Models\Photo;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\UserEditRequest;
+use Illuminate\Support\Facades\Session;
 
 class AdminUserController extends Controller
 {
@@ -62,6 +63,7 @@ class AdminUserController extends Controller
 
         User::create($input);
 
+        Session::flash('success', 'User added has been successfully ): ');
         return redirect()->route('users.index');
     }
 
@@ -150,6 +152,7 @@ class AdminUserController extends Controller
 
         $user->update($input);
 
+        Session::flash('success', 'User updated has been successfully ): ');
         return redirect()->route('users.index');
 
     }
@@ -169,9 +172,11 @@ class AdminUserController extends Controller
                     unlink($user->photo->file);
                 }
                 $user->delete();
+                Session::flash('success', 'User deleted has been successfully ): ');
                 return redirect()->route('users.index');
             }else {
                 $user->delete();
+                Session::flash('success', 'User deleted has been successfully ): ');
                 return redirect()->route('users.index');
             }
 

@@ -2,6 +2,10 @@
 
 
 @section('content')
+    @if(Session::has('success'))
+        <p class="shadow" style="background: rgb(214, 209, 209); color: #000; padding: 10px 15px; border-left: 3px solid green;">{{ session('success') }}</p>
+    @endif
+    <h1>Users</h1>
     <table class="table table-striped border-bottom table-hover">
         <thead>
             <tr>
