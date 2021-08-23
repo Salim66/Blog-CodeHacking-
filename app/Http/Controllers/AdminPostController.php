@@ -126,7 +126,8 @@ class AdminPostController extends Controller
 
                 }
             }else {
-                $post->photo->update(['file' => $name]);
+                $photo = Photo::create(['file' => $name]);
+                $input['photo_id'] = $photo->id;
             }
         }else {
             if($post->photo != null){
@@ -150,6 +151,15 @@ class AdminPostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::findOrFail($id);
+        if($post->photo != null){
+            if(file_exists($post->photo->file) && !empty($post->photo->file)){
+                unlink($post->photo->file);
+            }
+        }
+        $post->delete();
+
+        Session::flash('success', 'Post has been deleted successfully ): ');
+        return redirect()->route('posts.index');
     }
 }
