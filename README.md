@@ -1,1 +1,1 @@
-## Laravel eCommerce System
+## Laravel Blog System
