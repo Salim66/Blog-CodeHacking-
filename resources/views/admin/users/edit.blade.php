@@ -37,7 +37,7 @@
                 </div>
 
                 <div class="form-group" style="display: inline-block; float: left;">
-                    {!! Form::submit('Add User', ['class' => 'btn btn-primary']) !!}
+                    {!! Form::submit('Update User', ['class' => 'btn btn-primary']) !!}
                 </div>
 
             {!! Form::close() !!}

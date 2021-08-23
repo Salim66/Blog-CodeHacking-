@@ -20,6 +20,9 @@
     <link href="{{asset('admin/assets/css/libs/sb-admin-2.css')}}" rel="stylesheet">
     <link href="{{asset('admin/assets/css/libs/styles.css')}}" rel="stylesheet">
 
+    {{-- <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script> --}}
+
 </head>
 
 <body id="admin-page" style="padding-top: 0;">
@@ -44,11 +47,20 @@
         <ul class="nav navbar-top-links navbar-right">
 
 
+
             <!-- /.dropdown -->
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                    <input type="submit" value="Logout">
+                </form>
+                {{-- <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-user fa-fw"></i> {{Auth::user()->name}} <i class="fa fa-caret-down">
+
+
+
+                    </i>
+                </a> --}}
                 <ul class="dropdown-menu dropdown-user">
                     <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
                     </li>
