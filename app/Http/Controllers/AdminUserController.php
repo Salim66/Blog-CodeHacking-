@@ -162,6 +162,19 @@ class AdminUserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::findOrFail($id);
+        if($user){
+            if($user->photo){
+                if(file_exists($user->photo->file) && !empty($user->photo->file)){
+                    unlink($user->photo->file);
+                }
+                $user->delete();
+                return redirect()->route('users.index');
+            }else {
+                $user->delete();
+                return redirect()->route('users.index');
+            }
+
+        }
     }
 }

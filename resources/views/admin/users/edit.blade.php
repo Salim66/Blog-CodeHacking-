@@ -36,9 +36,14 @@
                     {!! Form::password('password', ['class' => 'form-control']) !!}
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" style="display: inline-block; float: left;">
                     {!! Form::submit('Add User', ['class' => 'btn btn-primary']) !!}
                 </div>
+
+            {!! Form::close() !!}
+
+            {!! Form::open(['method' => 'DELETE', 'action' => ['App\Http\Controllers\AdminUserController@destroy', $user->id], 'style' => 'display:inline-block; float: right;']) !!}
+                {!! Form::submit('DELETE', ['class' => 'btn btn-danger']) !!}
             {!! Form::close() !!}
         </div>
 
