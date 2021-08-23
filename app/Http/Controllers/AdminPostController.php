@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\PostCreateRequest;
+use App\Models\Category;
 
 class AdminPostController extends Controller
 {
@@ -29,7 +30,8 @@ class AdminPostController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create');
+        $categories = Category::pluck('name', 'id')->all();
+        return view('admin.posts.create', compact('categories'));
     }
 
     /**
@@ -45,7 +47,6 @@ class AdminPostController extends Controller
         $input = $request->all();
         // $input['user_id'] = Auth::id();
         $user = Auth::user();
-        $input['category_id'] = 1;
 
         if($file = $request->file('photo_id')){
             $name = time() . $file->getClientOriginalName();

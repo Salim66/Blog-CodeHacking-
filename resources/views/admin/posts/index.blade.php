@@ -28,7 +28,7 @@
                 <tr>
                     <td>{{ $i++ }}</td>
                     <td>{{ @$post->user->name }}</td>
-                    <td>{{ @$post->category_id }}</td>
+                    <td>{{ @$post->category ? $post->category->name : 'Unathorize' }}</td>
                     <td><img style="width: 35px; height: 35px; border-radius: 50%;" src="{{ @$post->photo ? URL::to($post->photo->file) : 'http://placehold.it/400x400' }}" alt="" class="shadow"></td>
                     <td><a href="{{ route('posts.edit', $post->id) }}">{{ $post->title }}</a></td>
                     <td>{{ $post->title }}</td>
