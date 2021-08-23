@@ -11,7 +11,7 @@ class Photo extends Model
 
     protected $guarded = [];
 
-    protected $uploads = '/images/';
+    protected $uploads = 'images/';
 
     public function getFileAttribute($photo){
         return $this->uploads . $photo;

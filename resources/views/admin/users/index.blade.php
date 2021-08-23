@@ -26,7 +26,7 @@
                     <td>{{ @$user->role->name }}</td>
                     <td><a href="{{ route('users.edit', $user->id) }}">{{ $user->name }}</a></td>
                     <td>{{ $user->email }}</td>
-                    <td><img style="width: 40px; height: 40px; border-radius: 50%;" src="{{ @$user->photo ? URL::to($user->photo->file) : 'http://placehold.it/400x400' }}" alt="" class="shadow"></td>
+                    <td><img style="width: 35px; height: 35px; border-radius: 50%;" src="{{ @$user->photo ? URL::to($user->photo->file) : 'http://placehold.it/400x400' }}" alt="" class="shadow"></td>
                     <td><?php if($user->is_active){ ?><span class='badge badge-success'>Active</span><?php }else{ ?><span class='badge badge-danger'>Inactive</span><?php } ?></td>
                     <td>{{ $user->created_at->diffForHumans() }}</td>
                     <td>{{ $user->updated_at->diffForHumans() }}</td>

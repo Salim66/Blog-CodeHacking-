@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Photo;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
-use App\Models\Photo;
+use App\Http\Requests\UserEditRequest;
 
 class AdminUserController extends Controller
 {
@@ -40,7 +41,12 @@ class AdminUserController extends Controller
      */
     public function store(UserRequest $request)
     {
-        $input = $request->all();
+        if(trim($request->passwrod) == ''){
+            $input = $request->except('password');
+        }else {
+            $input = $request->all();
+            $input['password'] = bcrypt($request->password);
+        }
 
         if($file = $request->file('photo_id')){
             $name = time() . $file->getClientOriginalName();
@@ -90,9 +96,62 @@ class AdminUserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserEditRequest $request, $id)
     {
-        //
+        // return $request->all();
+
+        // get user
+        $user = User::findOrFail($id);
+
+        // check password set or not
+        if(trim($request->passwrod) == ''){
+            $input = $request->except('password'); // ignore password
+        }else {
+            $input = $request->all();
+            $input['password'] = bcrypt($request->password);
+        }
+
+
+        // check photo
+        $name = '';
+        if($file = $request->file('photo_id')){
+            $name = time() . $file->getClientOriginalName();
+            $file->move('images/', $name);
+
+            // old photo check
+            if($user->photo != null){
+                //find the  user photo
+                $photo = Photo::findOrFail($user->photo->id);
+                // check photo has or not
+                if($photo){
+
+                    //unlink old photo
+                    if(file_exists($user->photo->file) && !empty($user->photo->file)){
+                        unlink($user->photo->file);
+                    }
+
+                    $photo->update(['file' => $name]); // update photo
+                    $input['photo_id'] = $photo->id;   // put the new photo_id
+
+                }
+
+            }else {
+                $photo = Photo::create(['file' => $name]);
+                $input['photo_id'] = $photo->id;   // put the new photo_id
+            }
+
+        }else {
+            if($user->photo != null){
+                $photo = Photo::findOrFail($user->photo->id);
+                $input['photo_id'] = $photo->id;
+            }
+        }
+
+
+        $user->update($input);
+
+        return redirect()->route('users.index');
+
     }
 
     /**
