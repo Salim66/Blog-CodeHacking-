@@ -103,6 +103,43 @@ class AdminPostController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $post = Post::findOrfail($id);
+        $input = $request->all();
+
+        if($file = $request->file('photo_id')){
+            $name = time() . $file->getClientOriginalName();
+            $file->move(public_path('images/'), $name);
+
+            // old photo check
+            if($post->photo != null){
+                // find the user photo
+                $photo = Photo::findOrFail($post->photo->id);
+                // check photo has or not
+                if($photo){
+
+                    if(file_exists($post->photo->file) && !empty($post->photo->file)){
+                        unlink($post->photo->file);
+                    }
+
+                    $photo->update(['file' => $name]); // update photo
+                    $input['photo_id'] = $photo->id; // put the new photo
+
+                }
+            }else {
+                $post->photo->update(['file' => $name]);
+            }
+        }else {
+            if($post->photo != null){
+                $input['photo_id'] = $post->photo->id;
+            }
+        }
+
+        Auth::user()->posts()->whereId($id)->first()->update($input);
+
+        Session::flash('success', 'Post has been updated successfully ):');
+        return redirect()->route('posts.index');
+
+
     }
 
     /**

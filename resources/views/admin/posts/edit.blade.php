@@ -6,7 +6,7 @@
     <h1>Edit Post</h1>
 
     <div class="row">
-        {!! Form::model($post, ['method' => 'POST', 'action' => ['App\Http\Controllers\AdminPostController@update', $post->id], 'files' => true]) !!}
+        {!! Form::model($post, ['method' => 'PATCH', 'action' => ['App\Http\Controllers\AdminPostController@update', $post->id], 'files' => true]) !!}
             <div class="form-group">
                 {!! Form::label('title', 'Title:') !!}
                 {!! Form::text('title', null, ['class' => 'form-control', 'autocomplete' => 'off']) !!}
@@ -24,7 +24,7 @@
                 {!! Form::textarea('body', null, ['class' => 'form-control']) !!}
             </div>
             <div class="form-group">
-                {!! Form::submit('Add Post', ['class' => 'btn btn-primary']) !!}
+                {!! Form::submit('Update Post', ['class' => 'btn btn-primary']) !!}
             </div>
         {!! Form::close() !!}
     </div>
