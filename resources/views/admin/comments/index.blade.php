@@ -17,6 +17,7 @@
                     <th>Email</th>
                     <th>Body</th>
                     <th>Post Link</th>
+                    <th>Reply Link</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,6 +32,7 @@
                         <td>{{ $comment->email }}</td>
                         <td>{{ $comment->body }}</td>
                         <td><a href="{{ route('blog.post', $comment->post_id) }}">View Post</a></td>
+                        <td><a href="{{ route('replies.show', $comment->id) }}">View Comments</a></td>
                         <td>
                             @if($comment->is_active == 1)
 

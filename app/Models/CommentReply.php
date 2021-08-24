@@ -13,7 +13,7 @@ class CommentReply extends Model
 
 
     public function comment(){
-        return $this->belongsTo('comment_id');
+        return $this->belongsTo('App\Models\Comment');
     }
 
 }
