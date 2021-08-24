@@ -11,4 +11,12 @@ class Comment extends Model
 
     protected $guarded = [];
 
+    public function post(){
+        return $this->belongsTo('App\Models\Post');
+    }
+
+    public function commentReplies(){
+        return $this->hasMany('App\Models\CommentReply');
+    }
+
 }

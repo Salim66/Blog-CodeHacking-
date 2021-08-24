@@ -11,4 +11,9 @@ class CommentReply extends Model
 
     protected $guarded = [];
 
+
+    public function comment(){
+        return $this->belongsTo('comment_id');
+    }
+
 }
