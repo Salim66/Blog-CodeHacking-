@@ -112,6 +112,9 @@ class CommentReplyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        CommentReply::findOrFail($id)->delete();
+
+        Session::flash('success', 'Reply has been delete successfully :) ');
+        return redirect()->back();
     }
 }

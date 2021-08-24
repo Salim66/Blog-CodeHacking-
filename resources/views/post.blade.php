@@ -77,11 +77,30 @@
                     </h4>
                    {{ $comment->body }}
 
+                    <div class="main-comment-reply-container">
+                        <button class="main-toggle-reply btn btn-primary pull-right"  tootle_id="{{ $comment->id }}">Reply</button>
+                        <div class="main-comment-reply-{{ $comment->id }} col-sm-10" style="display: none;">
+                            {!! Form::open(['method' => 'POST', 'action' => 'App\Http\Controllers\CommentReplyController@createReplay']) !!}
+
+                                <input type="hidden" name="comment_id" value={{ $comment->id }}>
+
+                                <div class="form-group" style="margin-top: 30px">
+                                    {!! Form::textarea('body', null, ['class' => 'form-control', 'rows' => '1']) !!}
+                                </div>
+
+                                <div class="form-group">
+                                    {!! Form::submit('Submit', ['class' => 'btn btn-primary']) !!}
+                                </div>
+
+                            {!! Form::close() !!}
+                        </div>
+                    </div>
+
                     @if(count($comment->commentReplies) > 0)
 
                         @foreach($comment->commentReplies as $reply)
                         <!-- Nested Comment -->
-                            <div class="media" style="margin-top: 60px; margin-bottom: 60px;">
+                            <div class="media" style="margin-top: 60px; margin-bottom: 60px; width: 100%;">
                                 <a class="pull-left" href="#">
                                     <img height="60" class="media-object" src="{{ $reply->photo ? URL::to($reply->photo) : 'http://placehold.it/64x64' }}" alt="">
                                 </a>
@@ -94,7 +113,7 @@
 
                                 <div class="comment-reply-container">
                                     <button class="toggle-reply btn btn-primary pull-right"  tootle_id="{{ $reply->id }}">Reply</button>
-                                    <div class="comment-reply-{{ $reply->id }}" style="display: none;">
+                                    <div class="comment-reply-{{ $reply->id }} col-sm-8" style="display: none;">
                                         {!! Form::open(['method' => 'POST', 'action' => 'App\Http\Controllers\CommentReplyController@createReplay']) !!}
 
                                             <input type="hidden" name="comment_id" value={{ $comment->id }}>
@@ -135,7 +154,13 @@
     <script>
         $(document).ready(function(){
 
+            //main comment reply
+            $('.main-comment-reply-container .main-toggle-reply').click(function(){
+                let id = $(this).attr('tootle_id');
+                $('.main-comment-reply-'+id).slideToggle('slow');
+            });
 
+            // child comment reply
             $('.comment-reply-container .toggle-reply').click(function(){
                 let id = $(this).attr('tootle_id');
                 $('.comment-reply-'+id).slideToggle('slow');
