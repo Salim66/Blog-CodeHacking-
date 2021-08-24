@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminCategoriesController;
+use App\Http\Controllers\AdminMediaContorller;
 use App\Http\Controllers\AdminPostController;
 use App\Http\Controllers\AdminUserController;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +34,8 @@ Route::group(['middleware' => 'admin'], function () {
     Route::resource('/admin/posts', AdminPostController::class);
     // Admin Categories Route
     Route::resource('/admin/categories', AdminCategoriesController::class);
+    // Admin Media Route
+    Route::resource('/admin/medias', AdminMediaContorller::class);
 
 });
 
