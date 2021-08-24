@@ -36,7 +36,12 @@ class AdminMediaContorller extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $file = $request->file('file');
+        $name = time() . $file->getClientOriginalName();
+        $file->move(public_path('images/'), $name);
+        Photo::create(['file' => $name]);
+
     }
 
     /**
