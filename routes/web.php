@@ -27,8 +27,16 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+// post routes
+Route::get('/post/{id}', [AdminPostController::class, 'post']);
+
 
 Route::group(['middleware' => 'admin'], function () {
+
+    //Admin Route
+    Route::get('/admin-panel', function(){
+        return view('admin.index');
+    });
 
     // Admin User Route
     Route::resource('/admin/users', AdminUserController::class);
