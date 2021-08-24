@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Photo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class AdminMediaContorller extends Controller
 {
@@ -86,6 +87,15 @@ class AdminMediaContorller extends Controller
      */
     public function destroy($id)
     {
-        //
+        $photo = Photo::findOrFail($id);
+        if($photo){
+            if(file_exists($photo->file) && !empty($photo->file)){
+                unlink($photo->file);
+            }
+
+            $photo->delete();
+            Session::flash('success', 'Photo has been deleted successfully ): ');
+            return redirect()-> back();
+        }
     }
 }
