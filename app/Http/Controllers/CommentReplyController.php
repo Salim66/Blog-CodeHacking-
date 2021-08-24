@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CommentReply;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class CommentReplyController extends Controller
 {
@@ -39,7 +42,17 @@ class CommentReplyController extends Controller
 
     public function createReplay(Request $request){
 
-        return "is't work";
+        CommentReply::create([
+            'comment_id'    => $request->comment_id,
+            'is_active'     => Auth::user()->is_active,
+            'author'        => Auth::user()->name,
+            'photo'         => Auth::user()->photo->file,
+            'email'         => Auth::user()->email,
+            'body'          => $request->body,
+        ]);
+
+        Session::flash('success', "Your reply has been submitted and is waiting modaretion");
+        return redirect()->back();
 
     }
 
