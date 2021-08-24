@@ -30,6 +30,34 @@
                         <td>{{ $comment->email }}</td>
                         <td>{{ $comment->body }}</td>
                         <td><a href="{{ route('blog.post', $comment->post_id) }}">View Post</a></td>
+                        <td>
+                            @if($comment->is_active == 1)
+
+                                {!! Form::open(['method' => 'PATCH', 'action' => ['App\Http\Controllers\PostCommentController@update', $comment->id]]) !!}
+                                    <input type="hidden" name="is_active" value="0">
+                                    <div class="form-group">
+                                        {!! Form::submit('Un-approved', ['class' => 'btn btn-info']) !!}
+                                    </div>
+                                {!! Form::close() !!}
+
+                            @else
+
+                                {!! Form::open(['method' => 'PATCH', 'action' => ['App\Http\Controllers\PostCommentController@update', $comment->id]]) !!}
+                                    <input type="hidden" name="is_active" value="1">
+                                    <div class="form-group">
+                                        {!! Form::submit('Approved', ['class' => 'btn btn-success']) !!}
+                                    </div>
+                                {!! Form::close() !!}
+
+                            @endif
+                        </td>
+                        <td>
+                            {!! Form::open(['method' => 'DELETE', 'action' => ['App\Http\Controllers\PostCommentController@destroy', $comment->id]]) !!}
+                                <div class="form-group">
+                                    {!! Form::submit('DELETE', ['class' => 'btn btn-danger']) !!}
+                                </div>
+                            {!! Form::close() !!}
+                        </td>
                     </tr>
                     @endforeach
                 @endif
