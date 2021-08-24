@@ -97,6 +97,8 @@ class CommentReplyController extends Controller
     {
         $reply = CommentReply::findOrFail($id);
         $reply->update($request->all());
+        // CommentReply::whereId($id)->first()->update($request->all());
+        // CommentReply::findOrFail($id)->update($request->all());
 
         $request->session()->flash('success', 'Reply has been updated successfull :) ');
         return redirect()->back();
