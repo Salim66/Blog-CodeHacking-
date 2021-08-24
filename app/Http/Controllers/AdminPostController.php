@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\PostCreateRequest;
 use App\Models\Category;
+use App\Models\Comment;
 
 class AdminPostController extends Controller
 {
@@ -168,7 +169,8 @@ class AdminPostController extends Controller
     public function post($id){
 
         $post = Post::findOrFail($id);
-        return view('post', compact('post'));
+        $comments = Comment::wherePostId($post->id)->get();
+        return view('post', compact('post', 'comments'));
 
     }
 

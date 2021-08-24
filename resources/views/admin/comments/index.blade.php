@@ -16,6 +16,7 @@
                     <th>Author</th>
                     <th>Email</th>
                     <th>Body</th>
+                    <th>Post Link</th>
                 </tr>
             </thead>
             <tbody>

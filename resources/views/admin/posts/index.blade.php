@@ -15,6 +15,8 @@
                 <th>Photo</th>
                 <th>title</th>
                 <th>body</th>
+                <th>Post Link</th>
+                <th>Comments</th>
                 <th>Created</th>
                 <th>Updated</th>
             </tr>

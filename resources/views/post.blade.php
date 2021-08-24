@@ -33,47 +33,53 @@
     <hr>
 
     <!-- Blog Comments -->
+    @if(Auth::check())
 
-    @if(Session::has('success'))
-        <p class="shadow" style="background: rgb(214, 209, 209); color: #000; padding: 10px 15px; border-left: 3px solid green;">{{ session('success') }}</p>
+        @if(Session::has('success'))
+            <p class="shadow" style="background: rgb(214, 209, 209); color: #000; padding: 10px 15px; border-left: 3px solid green;">{{ session('success') }}</p>
+        @endif
+        <!-- Comments Form -->
+        <div class="well">
+            <h4>Leave a Comment:</h4>
+
+            {!! Form::open(['method' => 'POST', 'action' => 'App\Http\Controllers\PostCommentController@store']) !!}
+
+                <input type="hidden" name="post_id" value={{ $post->id }}>
+
+                <div class="form-group">
+                    {!! Form::label('body', 'Body:') !!}
+                    {!! Form::textarea('body', null, ['class' => 'form-control', 'rows' => '3']) !!}
+                </div>
+
+                <div class="form-group">
+                    {!! Form::submit('Comment', ['class' => 'btn btn-primary']) !!}
+                </div>
+
+            {!! Form::close() !!}
+
+        </div>
+
     @endif
-    <!-- Comments Form -->
-    <div class="well">
-        <h4>Leave a Comment:</h4>
-
-        {!! Form::open(['method' => 'POST', 'action' => 'App\Http\Controllers\PostCommentController@store']) !!}
-
-            <input type="hidden" name="post_id" value={{ $post->id }}>
-
-            <div class="form-group">
-                {!! Form::label('body', 'Body:') !!}
-                {!! Form::textarea('body', null, ['class' => 'form-control', 'rows' => '3']) !!}
-            </div>
-
-            <div class="form-group">
-                {!! Form::submit('Comment', ['class' => 'btn btn-primary']) !!}
-            </div>
-
-        {!! Form::close() !!}
-
-    </div>
 
     <hr>
 
     <!-- Posted Comments -->
-
-    <!-- Comment -->
-    <div class="media">
-        <a class="pull-left" href="#">
-            <img class="media-object" src="http://placehold.it/64x64" alt="">
-        </a>
-        <div class="media-body">
-            <h4 class="media-heading">Start Bootstrap
-                <small>August 25, 2014 at 9:30 PM</small>
-            </h4>
-            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-        </div>
-    </div>
+    @if(count($comments) > 0)
+        <!-- Comment -->
+        @foreach($comments as $comment)
+            <div class="media">
+                <a class="pull-left" href="#">
+                    <img height="60" class="media-object" src="{{ $comment->photo ? URL::to($comment->photo) : 'http://placehold.it/60x60' }}" alt="">
+                </a>
+                <div class="media-body">
+                    <h4 class="media-heading">{{ $comment->author }}
+                        <small>{{ date('F d, Y, h:i a') }}</small>
+                    </h4>
+                   {{ $comment->body }}
+                </div>
+            </div>
+        @endforeach
+    @endif
 
     <!-- Comment -->
     <div class="media">
