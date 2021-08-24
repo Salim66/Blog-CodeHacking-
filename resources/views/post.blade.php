@@ -34,15 +34,28 @@
 
     <!-- Blog Comments -->
 
+    @if(Session::has('success'))
+        <p class="shadow" style="background: rgb(214, 209, 209); color: #000; padding: 10px 15px; border-left: 3px solid green;">{{ session('success') }}</p>
+    @endif
     <!-- Comments Form -->
     <div class="well">
         <h4>Leave a Comment:</h4>
-        <form role="form">
+
+        {!! Form::open(['method' => 'POST', 'action' => 'App\Http\Controllers\PostCommentController@store']) !!}
+
+            <input type="hidden" name="post_id" value={{ $post->id }}>
+
             <div class="form-group">
-                <textarea class="form-control" rows="3"></textarea>
+                {!! Form::label('body', 'Body:') !!}
+                {!! Form::textarea('body', null, ['class' => 'form-control', 'rows' => '3']) !!}
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+
+            <div class="form-group">
+                {!! Form::submit('Comment', ['class' => 'btn btn-primary']) !!}
+            </div>
+
+        {!! Form::close() !!}
+
     </div>
 
     <hr>
