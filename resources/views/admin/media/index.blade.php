@@ -18,7 +18,7 @@
                 @foreach($photos as $photo)
                     <tr>
                         <td>{{ $loop->index + 1; }}</td>
-                        <td><img style="height: 100px; width: 100px;" src="{{ $photo->file ? URL::to($photo->file) : 'no file' }}" alt=""></td>
+                        <td><img style="height: 100px; width: 100px;" src="{{ $photo->file ? URL::to($photo->file) : 'http://placehold.it/400x400' }}" alt=""></td>
                         <td>{{ $photo->created_at->diffForHumans() }}</td>
                     </tr>
                 @endforeach

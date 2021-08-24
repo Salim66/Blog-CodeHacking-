@@ -154,7 +154,7 @@
                             </li>
 
                             <li>
-                                <a href="">Upload Media</a>
+                                <a href="{{ route('medias.create') }}">Upload Media</a>
                             </li>
 
                         </ul>
