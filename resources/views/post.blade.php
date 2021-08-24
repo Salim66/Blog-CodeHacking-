@@ -76,35 +76,42 @@
                         <small>{{ date('F d, Y, h:i a') }}</small>
                     </h4>
                    {{ $comment->body }}
-                   <!-- Nested Comment -->
-                    <div class="media">
-                        <a class="pull-left" href="#">
-                            <img class="media-object" src="http://placehold.it/64x64" alt="">
-                        </a>
-                        <div class="media-body">
-                            <h4 class="media-heading">Nested Start Bootstrap
-                                <small>August 25, 2014 at 9:30 PM</small>
-                            </h4>
-                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                        </div>
 
-                        {!! Form::open(['method' => 'POST', 'action' => 'App\Http\Controllers\CommentReplyController@createReplay']) !!}
+                    @if(count($comment->commentReplies) > 0)
 
-                            <input type="hidden" name="comment_id" value={{ $comment->id }}>
+                        @foreach($comment->commentReplies as $reply)
+                        <!-- Nested Comment -->
+                            <div class="media" style="margin-top: 60px">
+                                <a class="pull-left" href="#">
+                                    <img height="60" class="media-object" src="{{ $reply->photo ? URL::to($reply->photo) : 'http://placehold.it/64x64' }}" alt="">
+                                </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading">{{ $reply->author }}
+                                        <small>{{ date('F d, Y, h:i a', strtotime($reply->created_at)) }}</small>
+                                    </h4>
+                                    {{ $reply->body }}
+                                </div>
 
-                            <div class="form-group">
-                                {!! Form::label('body', 'Body:') !!}
-                                {!! Form::textarea('body', null, ['class' => 'form-control', 'rows' => '1']) !!}
+                                {!! Form::open(['method' => 'POST', 'action' => 'App\Http\Controllers\CommentReplyController@createReplay']) !!}
+
+                                    <input type="hidden" name="comment_id" value={{ $comment->id }}>
+
+                                    <div class="form-group" style="margin-top: 30px">
+                                        {!! Form::textarea('body', null, ['class' => 'form-control', 'rows' => '1']) !!}
+                                    </div>
+
+                                    <div class="form-group">
+                                        {!! Form::submit('Reply', ['class' => 'btn btn-primary']) !!}
+                                    </div>
+
+                                {!! Form::close() !!}
+
                             </div>
+                            <!-- End Nested Comment -->
+                        @endforeach
 
-                            <div class="form-group">
-                                {!! Form::submit('Reply', ['class' => 'btn btn-primary']) !!}
-                            </div>
+                    @endif
 
-                        {!! Form::close() !!}
-
-                    </div>
-                    <!-- End Nested Comment -->
                 </div>
             </div>
         @endforeach
