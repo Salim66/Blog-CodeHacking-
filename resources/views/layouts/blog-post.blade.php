@@ -145,6 +145,8 @@
 <script src="{{asset('admin/assets/js/libs/sb-admin-2.js')}}"></script>
 <script src="{{asset('admin/assets/js/libs/scripts.js')}}"></script>
 
+@yield('scripts')
+
 </body>
 
 </html>
