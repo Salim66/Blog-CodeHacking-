@@ -46,7 +46,7 @@ class PostCommentController extends Controller
             'body'          => $request->body,
         ]);
 
-        $request->session()->flash('success', "Your comment has been submitted, and is waiting modaretion");
+        $request->session()->flash('success', "Your comment has been submitted and is waiting modaretion");
         return redirect()->back();
     }
 
