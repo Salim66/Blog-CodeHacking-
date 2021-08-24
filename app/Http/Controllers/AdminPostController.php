@@ -166,9 +166,9 @@ class AdminPostController extends Controller
 
 
     // post
-    public function post($id){
+    public function post($slug){
 
-        $post = Post::findOrFail($id);
+        $post = Post::whereSlug($slug)->first();
         $comments = Comment::wherePostId($post->id)->get();
         return view('post', compact('post', 'comments'));
 
