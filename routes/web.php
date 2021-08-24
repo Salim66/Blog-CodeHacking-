@@ -28,7 +28,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // post routes
-Route::get('/post/{id}', [AdminPostController::class, 'post']);
+Route::get('/post/{id}', [AdminPostController::class, 'post'])->name('blog.post');
 
 
 Route::group(['middleware' => 'admin'], function () {

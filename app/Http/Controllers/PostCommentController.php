@@ -15,7 +15,8 @@ class PostCommentController extends Controller
      */
     public function index()
     {
-        return view('admin.comments.index');
+        $comments = Comment::latest()->get();
+        return view('admin.comments.index', compact('comments'));
     }
 
     /**
@@ -48,6 +49,7 @@ class PostCommentController extends Controller
 
         $request->session()->flash('success', "Your comment has been submitted and is waiting modaretion");
         return redirect()->back();
+
     }
 
     /**
