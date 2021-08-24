@@ -20,7 +20,7 @@ class AdminPostController extends Controller
      */
     public function index()
     {
-        $posts = Post::latest()->get();
+        $posts = Post::latest()->paginate(2);
         return view('admin.posts.index', compact('posts'));
     }
 
@@ -168,7 +168,7 @@ class AdminPostController extends Controller
     // post
     public function post($slug){
 
-        $post = Post::whereSlug($slug)->first();
+        $post = Post::whereSlug($slug)->firstOrFail();
         $comments = Comment::wherePostId($post->id)->get();
         return view('post', compact('post', 'comments'));
 
