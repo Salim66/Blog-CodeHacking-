@@ -53,4 +53,6 @@ Route::group(['middleware' => 'admin'], function () {
 
 });
 
+// comments reply route
+Route::post('comment/replies', [CommentReplyController::class, 'createReplay']);
 

@@ -37,6 +37,12 @@ class CommentReplyController extends Controller
         //
     }
 
+    public function createReplay(Request $request){
+
+        return "is't work";
+
+    }
+
     /**
      * Display the specified resource.
      *
