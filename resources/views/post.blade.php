@@ -25,6 +25,7 @@
     <!-- Preview Image -->
     <img class="img-responsive" src="{{ $post->photo ? URL::to($post->photo->file) : 'http://placehold.it/400x400' }}" alt="">
 
+
     <hr>
 
     <!-- Post Content -->
@@ -69,7 +70,8 @@
         @foreach($comments as $comment)
             <div class="media">
                 <a class="pull-left" href="#">
-                    <img height="60" class="media-object" src="{{ $comment->photo ? URL::to($comment->photo) : 'http://placehold.it/60x60' }}" alt="">
+                    {{-- <img height="60" class="media-object" src="{{ $comment->photo ? URL::to($comment->photo) : 'http://placehold.it/60x60' }}" alt=""> --}}
+                    <img height="60" class="media-object" src="{{ Auth::user()->gravatar }}" alt="">
                 </a>
                 <div class="media-body">
                     <h4 class="media-heading">{{ $comment->author }}
