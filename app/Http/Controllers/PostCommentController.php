@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class PostCommentController extends Controller
 {
@@ -47,7 +48,7 @@ class PostCommentController extends Controller
             'body'          => $request->body,
         ]);
 
-        $request->session()->flash('success', "Your comment has been submitted and is waiting modaretion");
+        Session::flash('success', "Your comment has been submitted and is waiting modaretion");
         return redirect()->back();
 
     }
@@ -83,7 +84,11 @@ class PostCommentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $comment = Comment::findOrFail($id);
+        $comment->update($request->all());
+
+        Session::flash('success', 'Comment has been updated successfully ): ');
+        return redirect()->back();
     }
 
     /**
@@ -94,6 +99,9 @@ class PostCommentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Comment::findOrFail($id)->delete();
+
+        Session::flash('success', 'Comment has been deleted successfully ): ');
+        return redirect()->back();
     }
 }
