@@ -9,16 +9,16 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Blog Home - Start Bootstrap Template</title>
+    <title>Blog Post - Start Bootstrap Template</title>
 
-       <!-- Bootstrap Core CSS -->
-       <link href="{{asset('admin/assets/css/libs/blog-post.css')}}" rel="stylesheet">
-       <link href="{{asset('admin/assets/css/libs/bootstrap.css')}}" rel="stylesheet">
-       <link href="{{asset('admin/assets/css/libs/bootstrap.min.css')}}" rel="stylesheet">
-       <link href="{{asset('admin/assets/css/libs/font-awesome.css')}}" rel="stylesheet">
-       <link href="{{asset('admin/assets/css/libs/metisMenu.css')}}" rel="stylesheet">
-       <link href="{{asset('admin/assets/css/libs/sb-admin-2.css')}}" rel="stylesheet">
-       <link href="{{asset('admin/assets/css/libs/styles.css')}}" rel="stylesheet">
+        <!-- Bootstrap Core CSS -->
+        <link href="{{asset('admin/assets/css/libs/blog-post.css')}}" rel="stylesheet">
+        <link href="{{asset('admin/assets/css/libs/bootstrap.css')}}" rel="stylesheet">
+        <link href="{{asset('admin/assets/css/libs/bootstrap.min.css')}}" rel="stylesheet">
+        <link href="{{asset('admin/assets/css/libs/font-awesome.css')}}" rel="stylesheet">
+        <link href="{{asset('admin/assets/css/libs/metisMenu.css')}}" rel="stylesheet">
+        <link href="{{asset('admin/assets/css/libs/sb-admin-2.css')}}" rel="stylesheet">
+        <link href="{{asset('admin/assets/css/libs/styles.css')}}" rel="stylesheet">
 
 </head>
 
@@ -61,7 +61,6 @@
 
         <div class="row">
 
-            <!-- Blog Entries Column -->
             @yield('content')
 
             <!-- Blog Sidebar Widgets Column -->
@@ -97,7 +96,6 @@
                                 </li>
                             </ul>
                         </div>
-                        <!-- /.col-lg-6 -->
                         <div class="col-lg-6">
                             <ul class="list-unstyled">
                                 <li><a href="#">Category Name</a>
@@ -110,7 +108,6 @@
                                 </li>
                             </ul>
                         </div>
-                        <!-- /.col-lg-6 -->
                     </div>
                     <!-- /.row -->
                 </div>
@@ -134,15 +131,13 @@
                 <div class="col-lg-12">
                     <p>Copyright &copy; Your Website 2014</p>
                 </div>
-                <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
         </footer>
 
     </div>
     <!-- /.container -->
-
-   <!-- jQuery -->
+<!-- jQuery -->
 <script src="{{asset('admin/assets/js/libs/jquery.js')}}"></script>
 <script src="{{asset('admin/assets/js/libs/bootstrap.js')}}"></script>
 <script src="{{asset('admin/assets/js/libs/bootstrap.min.js')}}"></script>
