@@ -29,7 +29,7 @@
     <hr>
 
     <!-- Post Content -->
-    <p class="lead">{{ $post->body }}</p>
+    <p class="lead">{!! htmlspecialchars_decode($post->body) !!}</p>
 
     <hr>
 

@@ -3,6 +3,8 @@
 
 @section('content')
 
+@include('admin.layouts.includes.tinyeditor')
+
     <h1>Edit Post</h1>
 
     <div class="row">
@@ -25,7 +27,7 @@
                 </div>
                 <div class="form-group">
                     {!! Form::label('body', 'Description:') !!}
-                    {!! Form::textarea('body', null, ['class' => 'form-control']) !!}
+                    {!! Form::textarea('body', null, ['class' => 'form-control', 'id' => 'mytextarea']) !!}
                 </div>
                 <div class="form-group" style="display: inline-block; float:left;">
                     {!! Form::submit('Update Post', ['class' => 'btn btn-primary']) !!}
