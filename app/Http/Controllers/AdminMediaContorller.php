@@ -105,7 +105,17 @@ class AdminMediaContorller extends Controller
      */
     public function mediaDelete(Request $request){
 
+        $photos = Photo::findOrFail($request->checkBoxArray);
 
+        foreach($photos as $photo){
+            if(file_exists($photo->file)){
+                unlink($photo->file);
+            }
+            $photo->delete();
+        }
+
+        Session::flash('success', 'Media file has been deleted successfully :) ');
+        return redirect()->back();
 
     }
 
