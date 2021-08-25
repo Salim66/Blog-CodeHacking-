@@ -1,12 +1,13 @@
 <?php
 
-use App\Http\Controllers\AdminCategoriesController;
-use App\Http\Controllers\AdminMediaContorller;
+use UniSharp\LaravelFilemanager\Lfm;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminPostController;
 use App\Http\Controllers\AdminUserController;
-use App\Http\Controllers\CommentReplyController;
+use App\Http\Controllers\AdminMediaContorller;
 use App\Http\Controllers\PostCommentController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CommentReplyController;
+use App\Http\Controllers\AdminCategoriesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,4 +56,8 @@ Route::group(['middleware' => 'admin'], function () {
 
 // comments reply route
 Route::post('comment/replies', [CommentReplyController::class, 'createReplay']);
+
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
 
