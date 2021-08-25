@@ -98,4 +98,15 @@ class AdminMediaContorller extends Controller
             return redirect()-> back();
         }
     }
+
+
+    /**
+     * Multiple select and delete media
+     */
+    public function mediaDelete(Request $request){
+
+
+
+    }
+
 }
