@@ -55,3 +55,32 @@
 
 
 @stop
+
+@section('scripts')
+
+    <script>
+        // multiple file delete checkbox check
+        $(document).ready(function(){
+
+            $("#option").click(function(){
+
+                if(this.checked){
+
+                    $(".checkBoxes").each(function() {
+                        this.checked = true;
+                    });
+
+                }else {
+
+                    $(".checkBoxes").each(function() {
+                        this.checked = false;
+                    });
+
+                }
+
+            });
+
+        });
+    </script>
+
+@endsection
