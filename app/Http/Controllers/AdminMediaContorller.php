@@ -94,8 +94,7 @@ class AdminMediaContorller extends Controller
             }
 
             $photo->delete();
-            Session::flash('success', 'Photo has been deleted successfully ): ');
-            return redirect()-> back();
+
         }
     }
 
@@ -105,17 +104,38 @@ class AdminMediaContorller extends Controller
      */
     public function mediaDelete(Request $request){
 
-        $photos = Photo::findOrFail($request->checkBoxArray);
+        //Single media delete
+        if(isset($request->delete_single)){
 
-        foreach($photos as $photo){
-            if(file_exists($photo->file)){
-                unlink($photo->file);
-            }
-            $photo->delete();
+            //call destroy method pass the photo id
+            $this->destroy($request->photo_id);
+            Session::flash('success', 'Photo has been deleted successfully ): ');
+            return redirect()-> back();
+
         }
 
-        Session::flash('success', 'Media file has been deleted successfully :) ');
-        return redirect()->back();
+
+        // Multiple media delete
+        if(isset($request->delete_all) && !empty($request->checkBoxArray)){
+
+            $photos = Photo::findOrFail($request->checkBoxArray);
+
+            foreach($photos as $photo){
+                if(file_exists($photo->file)){
+                    unlink($photo->file);
+                }
+                $photo->delete();
+            }
+
+            Session::flash('success', 'Media files has been deleted successfully :) ');
+            return redirect()->back();
+
+        }else {
+
+            Session::flash('error', 'Please select any item, then delete it ! ');
+            return redirect()->back();
+
+        }
 
     }
 

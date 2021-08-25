@@ -7,17 +7,20 @@
     @if(Session::has('success'))
     <p class="shadow" style="background: rgb(214, 209, 209); color: #000; padding: 10px 15px; border-left: 3px solid green;">{{ session('success') }}</p>
     @endif
+    @if(Session::has('error'))
+    <p class="shadow" style="background: rgb(214, 209, 209); color: #000; padding: 10px 15px; border-left: 3px solid red;">{{ session('error') }}</p>
+    @endif
 
     <form action="{{ route('media.delete') }}" method="POST" class="form-inline">
         @csrf
         @method('DELETE')
         <div class="form-group">
             <select name="checkBoxArray" id="" class="form-control">
-                <option value="delete">Delete</option>
+                <option value="">Delete</option>
             </select>
         </div>
         <div class="form-group">
-            <input type="submit" class="btn btn-primary">
+            <input type="submit" name="delete_all" class="btn btn-primary">
         </div>
 
 
@@ -41,9 +44,18 @@
                             <td><img style="height: 100px; width: 100px;" src="{{ $photo->file ? URL::to($photo->file) : 'http://placehold.it/400x400' }}" alt=""></td>
                             <td>{{ $photo->created_at->diffForHumans() }}</td>
                             <td>
-                                {!! Form::open(['method' => 'DELETE', 'action' => ['App\Http\Controllers\AdminMediaContorller@destroy', $photo->id]]) !!}
+
+                                <!--not work nested form -->
+                                {{-- {!! Form::open(['method' => 'DELETE', 'action' => ['App\Http\Controllers\AdminMediaContorller@destroy', $photo->id]]) !!}
                                     {!! Form::submit('DELETE', ['class' => 'btn btn-danger']) !!}
-                                {!! Form::close() !!}
+                                {!! Form::close() !!} --}}
+
+                                <input type="hidden" name="photo_id" value="{{ $photo->id }}">
+                                <div class="form-group">
+                                    <input type="submit" name="delete_single" class="btn btn-danger" value="Delete">
+                                </div>
+
+
                             </td>
                         </tr>
                     @endforeach
