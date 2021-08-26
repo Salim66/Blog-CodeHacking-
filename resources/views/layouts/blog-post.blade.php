@@ -17,3 +17,5 @@
         <!-- /.row -->
 
 @include('layouts.includes.front_footer')
+
+@yield('scripts')
