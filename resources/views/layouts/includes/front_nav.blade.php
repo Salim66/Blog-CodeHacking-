@@ -12,16 +12,23 @@
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li>
-                    <a href="#">About</a>
-                </li>
-                <li>
-                    <a href="#">Services</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
-                </li>
+            <ul class="nav navbar-nav navbar-right">
+
+                @guest
+
+                    <li><a href="{{ url('/login') }}">Login</a></li>
+                    <li><a href="{{ url('/register') }}">Registation</a></li>
+
+                @else
+
+                    <li><a href="{{ url('/admin-panel') }}">Admin</a></li>
+                    <form method="POST" action="{{ route('logout') }}" style="display: inline-block; margin-top: 15px">
+                        @csrf
+                        <input type="submit" value="Logout">
+                    </form>
+
+                @endguest
+
             </ul>
         </div>
         <!-- /.navbar-collapse -->
