@@ -14,6 +14,9 @@
 
                @yield('content')
 
+               <div class="text-center">
+                {{ $posts->links('pagination::bootstrap-4') }}
+               </div>
 
                 <!-- Pager -->
                 {{-- <ul class="pager">
