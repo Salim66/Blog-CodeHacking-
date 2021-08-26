@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminMediaContorller;
 use App\Http\Controllers\PostCommentController;
 use App\Http\Controllers\CommentReplyController;
 use App\Http\Controllers\AdminCategoriesController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,9 +36,7 @@ Route::get('/post/{id}', [AdminPostController::class, 'post'])->name('blog.post'
 Route::group(['middleware' => 'admin'], function () {
 
     //Admin Route
-    Route::get('/admin-panel', function(){
-        return view('admin.index');
-    });
+    Route::get('/admin-panel', [AdminController::class, 'index']);
 
     // Admin User Route
     Route::resource('/admin/users', AdminUserController::class);
